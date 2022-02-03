@@ -11,9 +11,12 @@
   "author": "Cedrick Garcia",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "concurrently": "^7.0.0",
     "dotenv": "^15.0.0",
     "express": "^4.17.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.3.1",
     "mongoose": "^6.2.0",
     "nodemon": "^2.0.15"
