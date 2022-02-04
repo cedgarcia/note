@@ -21,7 +21,7 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
-    pic: {
+    image: {
       type: String,
       required: true,
       default:
@@ -42,6 +42,7 @@ userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     next();
   }
+  // Password Encryption
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });
