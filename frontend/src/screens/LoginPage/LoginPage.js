@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react';
 import MainScreen from '../../components/MainScreen/MainScreeen';
 import { Link } from 'react-router-dom';
 
-import { useNavigate } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import Loading from '../../components/Loading';
 import ErrorMessage from '../../components/ErrorMessage';
 import axios from 'axios';
 
 const LoginPage = ({ history }) => {
-  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);

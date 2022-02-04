@@ -61,8 +61,10 @@ const RegisterPage = () => {
         method: 'post',
         body: data,
       })
+        // SET URL
         .then((res) => res.json())
         .then((data) => {
+          console.log(data);
           setImage(data.url.toString());
         })
         .catch((err) => {
@@ -116,10 +118,14 @@ const RegisterPage = () => {
               placeholder="Confirm Password"
             />
           </Form.Group>
-          Control
+
+          {imageMessage && (
+            <ErrorMessage variant="danger">{imageMessage}</ErrorMessage>
+          )}
           <Form.Group>
             <Form.Label>Profile Picture</Form.Label>
             <Form.Control
+              onChange={(e) => postDetails(e.target.files[0])}
               id="custom-file"
               type="file"
               label="Upload Profile Picture"
