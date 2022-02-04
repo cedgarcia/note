@@ -11,14 +11,14 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password,
-    pic,
+    image,
   });
   if (user) {
     res.status(201).json({
       _id: user._id,
       name: user.name,
       email: user.email,
-      pic: user.pic,
+      image: user.image,
       isAdmin: user.isAdmin,
     });
   } else {
