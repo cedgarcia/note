@@ -3,12 +3,21 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { userLoginReducer } from './reducers/userReducers';
 
-import { noteListReducer } from './reducers/notesReducer';
+import {
+  noteCreateReducer,
+  noteDeleteReducer,
+  noteListReducer,
+  noteUpdateReducer,
+} from './reducers/notesReducer';
 
 const reducer = combineReducers({
   //THIS WILL COUNTAIN OUR REDUCERs
   userLogin: userLoginReducer,
+  // NOTES
   noteList: noteListReducer,
+  noteCreate: noteCreateReducer,
+  noteUpdate: noteUpdateReducer,
+  noteDelete: noteDeleteReducer,
 });
 const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))

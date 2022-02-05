@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import MainScreeen from '../../components/MainScreen/MainScreeen';
 import { Link } from 'react-router-dom';
 import { Badge, Button, Card } from 'react-bootstrap';
@@ -13,17 +12,22 @@ function MyNotes() {
 
   const noteList = useSelector((state) => state.noteList);
   const { loading, error, notes } = noteList;
+  const noteCreate = useSelector((state) => state.noteCreate);
+  const { success: successCreate } = noteCreate;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   useEffect(() => {
     dispatch(listNotes());
-  }, [dispatch]);
+  }, [dispatch, userInfo, successCreate]);
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure ?')) {
     }
   };
   return (
-    <MainScreeen title="Welcome Back Cedrick">
+    <MainScreeen title={`Welcome Back ${userInfo.name}`}>
       <Link to="/createnote">
         <Button style={{ marginLeft: 10, marginBottom: 6 }} size="lg">
           Create New Note
