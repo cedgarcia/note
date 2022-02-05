@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Badge, Button, Card } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
 import { useDispatch, useSelector } from 'react-redux';
-import { listNotes } from '../../actions/notesActions';
+import { deleteNoteAction, listNotes } from '../../actions/notesActions';
 import Loading from '../../components/Loading';
 import ErrorMessage from '../../components/ErrorMessage';
 function MyNotes() {
@@ -18,12 +18,20 @@ function MyNotes() {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const noteDelete = useSelector((state) => state.noteDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = noteDelete;
+
   useEffect(() => {
     dispatch(listNotes());
-  }, [dispatch, userInfo, successCreate]);
+  }, [dispatch, userInfo, successCreate, successDelete]);
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure ?')) {
+      dispatch(deleteNoteAction(id));
     }
   };
   return (

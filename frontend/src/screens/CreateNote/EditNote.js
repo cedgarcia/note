@@ -21,15 +21,15 @@ function EditNote({ match }) {
   const noteUpdate = useSelector((state) => state.noteUpdate);
   const { loading, error } = noteUpdate;
 
-  // const noteDelete = useSelector((state) => state.noteDelete);
-  // const { loading: loadingDelete, error: errorDelete } = noteDelete;
+  const noteDelete = useSelector((state) => state.noteDelete);
+  const { loading: loadingDelete, error: errorDelete } = noteDelete;
 
-  // const deleteHandler = (id) => {
-  //   if (window.confirm('Are you sure?')) {
-  //     dispatch(deleteNoteAction(id));
-  //   }
-  //   navigate('/mynotes');
-  // };
+  const deleteHandler = (id) => {
+    if (window.confirm('Are you sure?')) {
+      dispatch(deleteNoteAction(id));
+    }
+    navigate('/mynotes');
+  };
   const params = useParams();
 
   useEffect(() => {
@@ -66,11 +66,11 @@ function EditNote({ match }) {
         <Card.Header>Edit your Note</Card.Header>
         <Card.Body>
           <Form onSubmit={updateHandler}>
-            {/* {loadingDelete && <Loading />} */}
-            {/* {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+            {loadingDelete && <Loading />}
+            {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
             {errorDelete && (
               <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
-            )} */}
+            )}
             <Form.Group controlId="title">
               <Form.Label>Title</Form.Label>
               <Form.Control
@@ -116,7 +116,7 @@ function EditNote({ match }) {
             <Button
               className="mx-2"
               variant="danger"
-              // onClick={() => deleteHandler(match.params.id)}
+              onClick={() => deleteHandler(match.params.id)}
             >
               Delete Note
             </Button>
