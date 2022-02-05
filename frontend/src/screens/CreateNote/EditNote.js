@@ -116,7 +116,7 @@ function EditNote({ match }) {
             <Button
               className="mx-2"
               variant="danger"
-              onClick={() => deleteHandler(match.params.id)}
+              onClick={() => deleteHandler(params.id)}
             >
               Delete Note
             </Button>
