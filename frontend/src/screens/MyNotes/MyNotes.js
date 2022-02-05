@@ -4,23 +4,24 @@ import MainScreeen from '../../components/MainScreen/MainScreeen';
 import { Link } from 'react-router-dom';
 import { Badge, Button, Card } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
+import { useDispatch, useSelector } from 'react-redux';
+import { listNotes } from '../../actions/notesActions';
+import Loading from '../../components/Loading';
+import ErrorMessage from '../../components/ErrorMessage';
 function MyNotes() {
-  const [notes, setNotes] = useState([]);
+  const dispatch = useDispatch();
+
+  const noteList = useSelector((state) => state.noteList);
+  const { loading, error, notes } = noteList;
+
+  useEffect(() => {
+    dispatch(listNotes());
+  }, [dispatch]);
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure ?')) {
     }
   };
-
-  const fetchNotes = async () => {
-    const { data } = await axios.get('/api/notes');
-    setNotes(data);
-  };
-  console.log(notes);
-  useEffect(() => {
-    fetchNotes();
-  }, []);
-
   return (
     <MainScreeen title="Welcome Back Cedrick">
       <Link to="/createnote">
@@ -28,8 +29,9 @@ function MyNotes() {
           Create New Note
         </Button>
       </Link>
-
-      {notes.map((note) => (
+      {/* {error && <ErrorMessage >{error}</ErrorMessage>} */}
+      {loading && <Loading />}
+      {notes?.map((note) => (
         <Accordion key={note._id}>
           <Accordion.Item variant="link" eventKey="0">
             <Card style={{ margin: 10 }}>
